@@ -1,0 +1,16 @@
+<ion-searchbar [debounce]="2000" (ionInput)="handleInput($event)">
+</ion-searchbar>
+
+<ion-list *ngIf="!isLoading">
+    <ion-item *ngFor="let item of placesDetails">
+      <ion-img class="image-size" [src]="item.source" alt="Image of {{ item.name }}"></ion-img>
+      <ion-label>
+        {{ item.name }}
+        <br>
+        {{ item.country }}
+      </ion-label>
+      <ion-button (click)="addDestination(item)">
+        <ion-icon name="add-circle"></ion-icon>
+      </ion-button>
+    </ion-item>
+</ion-list>

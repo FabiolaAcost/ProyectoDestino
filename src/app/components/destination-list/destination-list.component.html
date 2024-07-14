@@ -1,0 +1,58 @@
+<ion-list>
+  <ion-item *ngFor="let destination of destinations">
+    <ion-thumbnail slot="start">
+      <ion-img class="image-size" [src]="destination.photo" alt="Image of {{ destination.name }}"></ion-img>
+    </ion-thumbnail>
+    <ion-label>
+      <h2>{{destination.name}}</h2>
+      <p><strong>{{destination.country}}</strong></p>
+    </ion-label>
+    <ion-buttons slot="end">
+      <ion-button (click)="openRegisterValueModal(destination)">
+        <ion-icon name="airplane-outline"></ion-icon>
+        {{ destination.tripCost | currency:'USD':'symbol-narrow':'1.2-2' }}
+      </ion-button>
+      <ion-button (click)="capturePhoto(destination)">
+        <ion-icon name="camera-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="openDeleteConfirmModal(destination)">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-item>
+</ion-list>
+
+<ion-modal [isOpen]="isModalOpen" (willDismiss)="onWillDismiss($event)">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="closeModal()">Cancelar</ion-button>
+        </ion-buttons>
+        <ion-title>Valor vuelo ida y vuelta</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="saveNewCost()" strong="true">Confirmar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-item>
+        <ion-label position="floating">Valor del vuelo ida y vuelta en USD</ion-label>
+        <ion-input type="number" [(ngModel)]="newTripCost"></ion-input>
+      </ion-item>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+<ion-modal [isOpen]="isDeleteModalOpen" (willDismiss)="onWillDismissDelete($event)">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>¿Desea Eliminar el destino ?</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="closeDeleteModal()" slot="start">Cancelar</ion-button>
+          <ion-button (click)="confirmDelete()" color="danger">Eliminar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+  </ng-template>
+</ion-modal>

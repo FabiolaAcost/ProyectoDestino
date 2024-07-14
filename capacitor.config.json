@@ -1,0 +1,13 @@
+{
+  "appId": "ionic.travelproject",
+  "appName": "travelproject",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "CapacitorHttp": {
+      "enabled": true
+    }
+  }
+}
